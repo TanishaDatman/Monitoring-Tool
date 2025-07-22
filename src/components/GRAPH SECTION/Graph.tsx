@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Graph = ({ iframeSrc }: { iframeSrc: string }) => {
   return (
     <div className="w-full bg-gray-800 h-full p-2">
