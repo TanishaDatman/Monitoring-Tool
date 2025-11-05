@@ -1,15 +1,16 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './Layout';
-import GraphContainer from './components/GRAPH SECTION/GraphContainer';
-
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Layout from "./Layout";
+import GraphContainerWOW from "./components/GRAPH SECTION/GraphContainerWOW";
+import GraphContainerERRORS from "./components/GRAPH SECTION/GraphContainerERROR";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<GraphContainer />} />
+          <Route index element={<Navigate to="wow" replace />} />
+          <Route path="wow/:country" element={<GraphContainerWOW />} />
+          <Route path="errors" element={<GraphContainerERRORS />} />
         </Route>
       </Routes>
     </BrowserRouter>
