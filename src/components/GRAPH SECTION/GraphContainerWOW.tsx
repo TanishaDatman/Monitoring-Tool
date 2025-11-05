@@ -2,33 +2,38 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Graph from "./Graph";
 
+
+const now = Date.now();
+const threeHoursAgo = now - 3 * 60 * 60 * 1000;
 // Map country to URLs
 const COUNTRY_GRAPHS: Record<string, string[]> = {
   uk: [
     // GPAY WOW - UK
-    "https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=1762333562782&to=1762344362782&timezone=Europe%2FLondon&refresh=5m&panelId=panel-1&__feature.dashboardSceneSolo=true",
+    `https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=${threeHoursAgo}&to=${now}ezone=Europe%2FLondon&refresh=5m&panelId=panel-1&__feature.dashboardSceneSolo=true`,
     // ExpressPay WOW - UK
-    "https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=1762333562782&to=1762344362782&timezone=Europe%2FLondon&refresh=5m&panelId=panel-3&__feature.dashboardSceneSolo=true",
+    `https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=${threeHoursAgo}&to=${now}&timezone=Europe%2FLondon&refresh=5m&panelId=panel-3&__feature.dashboardSceneSolo=true`,
     // APAY WOW - UK
-    "https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=1762333562782&to=1762344362782&timezone=Europe%2FLondon&refresh=5m&panelId=panel-2&__feature.dashboardSceneSolo=true",
+    `https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=${threeHoursAgo}&to=${now}&timezone=Europe%2FLondon&refresh=5m&panelId=panel-2&__feature.dashboardSceneSolo=true`,
     // New Card WOW - UK
-    "https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=1762333885104&to=1762344685104&timezone=Europe%2FLondon&refresh=5m&panelId=panel-4&__feature.dashboardSceneSolo=true",
+    `https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=${threeHoursAgo}&to=${now}&timezone=Europe%2FLondon&refresh=5m&panelId=panel-4&__feature.dashboardSceneSolo=true`,
     // All Methods WOW - UK
-    "https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=1762333562782&to=1762344362782&timezone=Europe%2FLondon&refresh=5m&panelId=panel-5&__feature.dashboardSceneSolo=true",
+    `https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=${threeHoursAgo}&to=${now}&timezone=Europe%2FLondon&refresh=5m&panelId=panel-5&__feature.dashboardSceneSolo=true`,
   ],
   aus: [
     // GPAY WOW - AUS
-    "https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=1762335488106&to=1762346288106&timezone=Europe%2FLondon&refresh=5m&panelId=panel-7&__feature.dashboardSceneSolo=true",
+    `https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=${threeHoursAgo}&to=${now}&timezone=Europe%2FLondon&refresh=5m&panelId=panel-7&__feature.dashboardSceneSolo=true`,
     // ExpressPay WOW - AUS
-    "https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=1762335488106&to=1762346288106&timezone=Europe%2FLondon&refresh=5m&panelId=panel-8&__feature.dashboardSceneSolo=true",
+    `https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=${threeHoursAgo}&to=${now}&timezone=Europe%2FLondon&refresh=5m&panelId=panel-8&__feature.dashboardSceneSolo=true`,
     // APAY WOW - AUS
-    "https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=1762335488106&to=1762346288106&timezone=Europe%2FLondon&refresh=5m&panelId=panel-9&__feature.dashboardSceneSolo=true",
+    `https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=${threeHoursAgo}&to=${now}&timezone=Europe%2FLondon&refresh=5m&panelId=panel-9&__feature.dashboardSceneSolo=true`,
     // New Card WOW - AUS
-    "https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=1762335488106&to=1762346288106&timezone=Europe%2FLondon&refresh=5m&panelId=panel-10&__feature.dashboardSceneSolo=true",
+    `https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=${threeHoursAgo}&to=${now}&timezone=Europe%2FLondon&refresh=5m&panelId=panel-10&__feature.dashboardSceneSolo=true`,
     // All Methods WOW - AUS
-    "https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=1762335488106&to=1762346288106&timezone=Europe%2FLondon&refresh=5m&panelId=panel-6&__feature.dashboardSceneSolo=true",
+    `https://grafana.datman.tools/d-solo/kugxgcc/live-wow-per-country?orgId=1&from=${threeHoursAgo}&to=${now}&timezone=Europe%2FLondon&refresh=5m&panelId=panel-6&__feature.dashboardSceneSolo=true`,
   ],
 };
+
+
 
 const BATCH_SIZE = 4;
 const INTERVAL_MS = 30000;
