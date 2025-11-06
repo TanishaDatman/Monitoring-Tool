@@ -27,7 +27,7 @@ const Navbar = () => {
   const { range, setRange } = useTimeRange();
 
   return (
-    <nav className="bg-gray-800 text-white px-6 py-4 flex items-center gap-6 border-b xl:h-24 h-16 border-gray-300">
+    <nav className="bg-gray-800 text-white px-6 py-4 flex items-center gap-6 border-b h-16 border-gray-300">
       <img src={logo} alt="Logo" className="h-8" />
       <h1 className="text-xl font-semibold flex-1">
         {COUNTRY_LABELS[country ?? "uk"]}
