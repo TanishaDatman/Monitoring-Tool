@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/NAVBAR/Navbar';
-import AlertContainer from './components/ALERT SECTION/AlertContainer';
-import RuleContainer from './components/RULE ENGINE/RuleContainer';
+
 
 const Layout = () => {
-  const [latestRule, setLatestRule] = useState(null);
+  // const [latestRule, setLatestRule] = useState(null);
 
   return (
     <div className="h-screen w-screen flex flex-col">

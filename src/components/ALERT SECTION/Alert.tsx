@@ -1,4 +1,3 @@
-import React from 'react';
 
 const Alert = ({ message, type }: { message: string; type: 'warning' | 'error' | 'normal' }) => {
   const colorMap = {
